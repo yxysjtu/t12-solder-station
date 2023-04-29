@@ -1,0 +1,11 @@
+t12-soldering-station\led.o: ..\..\..\lib\led.cpp
+t12-soldering-station\led.o: ..\..\..\lib\led.h
+t12-soldering-station\led.o: ..\..\..\lib\basic.h
+t12-soldering-station\led.o: ..\..\..\lib\sys.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Include/core_cm3.h
+t12-soldering-station\led.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Include/cmsis_version.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Include/cmsis_compiler.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Include/cmsis_armcc.h
+t12-soldering-station\led.o: ../../../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
