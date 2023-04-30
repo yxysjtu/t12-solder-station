@@ -380,8 +380,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-int pwm_max = 1000, cnt = 0, temp_t = 50, pwm = 500;
-uint16_t temp_set = 300, temp_real;
+uint32_t cnt = 0;
+int pwm_max = 1000, temp_t = 50, pwm = 500;
+uint16_t temp_set = 300, temp_real, state = 1; //0:sleep; 1:awake
 uint16_t measure_temp, measure_vibration, measure_temp_set;
 float kp = 30, ki = 0, kd = 0;
 int err, prev_err = 0, sum_err = 0;
@@ -435,13 +436,19 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim){
 			else pwm = kp * err + kd * (err - prev_err) + ki * sum_err;
 			if(pwm > 1000) pwm = 1000;
 			if(pwm < 0) pwm = 0;
+			if(state == 0) pwm = 0;
 			prev_err = err;
 			//pwm = (float)measure_temp_set / 4096 * 1800;
 			TIM2->CCR1 = pwm;
 			
 			//sense vibration
-			
-			//update temperature control
+			if(measure_vibration > 100){ //threshold
+				cnt = 0;
+				state = 1;
+			}else if(cnt > 60000){ //1 min no movement
+				state = 0;
+			}
+
 		}
 	}
 }
