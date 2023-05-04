@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+//#include "oled.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -59,6 +60,41 @@ static void MX_I2C1_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
+void OLED_ShowStr(unsigned char x, unsigned char y, unsigned char ch[], unsigned char TextSize);
+void OLED_Init(void);
+void OLED_CLS(void);
+void OLED_ShowCN(unsigned char x, unsigned char y, unsigned char N);
+
+uint32_t cnt = 0;
+int pwm_max = 1000, temp_t = 50, pwm = 500;
+uint16_t temp_set = 300, temp_real, state = 1; //0:sleep; 1:awake
+uint16_t measure_temp, measure_vibration, measure_temp_set;
+float kp = 30, ki = 0, kd = 0;
+int err, prev_err = 0, sum_err = 0;
+
+int width = 16, offset = 14;
+void oled_show(){
+	//temp_real / temp_set
+	int num = temp_real;
+	if(state){
+		OLED_ShowCN(width * 6 + offset, 2, num / 100);
+		OLED_ShowCN(width * 5 + offset, 2, (num / 10) % 10);
+		OLED_ShowCN(width * 4 + offset, 2, num % 10);
+	}else{
+		OLED_ShowCN(width * 7, 2, 11);
+		OLED_ShowCN(width * 6, 2, 11);
+		OLED_ShowCN(width * 5, 2, 11);
+	}
+	
+	OLED_ShowCN(54, 2, 10);
+	
+	num = temp_set;
+	OLED_ShowCN(32, 2, num / 100);
+	OLED_ShowCN(16, 2, (num / 10) % 10);
+	//OLED_ShowCN(0, 2, 0);
+	OLED_ShowCN(0, 2, num % 10);
+	
+}
 
 /* USER CODE END PFP */
 
@@ -95,12 +131,16 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+	
   MX_GPIO_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_USART1_UART_Init();
   MX_TIM2_Init();
+  
   /* USER CODE BEGIN 2 */
+	OLED_Init();
+	OLED_CLS();
 
 	HAL_TIM_Base_Start_IT(&htim2);
 	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
@@ -111,11 +151,13 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+		oled_show();
 	  	HAL_GPIO_TogglePin(GPIOC,GPIO_PIN_13);//对GPIO口的电平进行反转（低-高，高—低）
 		HAL_Delay(500);
 	  
@@ -380,12 +422,7 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-uint32_t cnt = 0;
-int pwm_max = 1000, temp_t = 50, pwm = 500;
-uint16_t temp_set = 300, temp_real, state = 1; //0:sleep; 1:awake
-uint16_t measure_temp, measure_vibration, measure_temp_set;
-float kp = 30, ki = 0, kd = 0;
-int err, prev_err = 0, sum_err = 0;
+
 
 void ADC_Select_CH (uint32_t channel)
 {

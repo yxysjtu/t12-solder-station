@@ -21,6 +21,7 @@
 "t12-soldering-station\stm32f1xx_hal_tim_ex.o"
 "t12-soldering-station\stm32f1xx_hal_uart.o"
 "t12-soldering-station\system_stm32f1xx.o"
+"t12-soldering-station\oled.o"
 --strict --scatter "t12-soldering-station\t12-soldering-station.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
