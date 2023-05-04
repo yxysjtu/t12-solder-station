@@ -69,7 +69,7 @@ uint32_t cnt = 0;
 int pwm_max = 1000, temp_t = 50, pwm = 500;
 uint16_t temp_set = 300, temp_real, state = 1; //0:sleep; 1:awake
 uint16_t measure_temp, measure_vibration, measure_temp_set;
-float kp = 30, ki = 0, kd = 0;
+float kp = 100, ki = 0, kd = 0;
 int err, prev_err = 0, sum_err = 0;
 
 int width = 16, offset = 14;
@@ -312,7 +312,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 72-1;
+  htim2.Init.Prescaler = 144-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 1050-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -445,7 +445,7 @@ void adc_scan(){
 	HAL_ADC_PollForConversion(&hadc1, 1000);
 	int temp_val = HAL_ADC_GetValue(&hadc1);
 	if(temp_val < 3800){
-		measure_temp = measure_temp * 0.9 + HAL_ADC_GetValue(&hadc1) * 0.1;
+		measure_temp = measure_temp * 0.95 + HAL_ADC_GetValue(&hadc1) * 0.05;
 	}
 	HAL_ADC_Stop(&hadc1);
 	ADC_Select_CH(ADC_CHANNEL_2);
@@ -456,7 +456,7 @@ void adc_scan(){
 	ADC_Select_CH(ADC_CHANNEL_3);
 	HAL_ADC_Start(&hadc1);
 	HAL_ADC_PollForConversion(&hadc1, 1000);
-	measure_temp_set = measure_temp_set * 0.9 + HAL_ADC_GetValue(&hadc1) * 0.1;
+	measure_temp_set = measure_temp_set * 0.95 + HAL_ADC_GetValue(&hadc1) * 0.05;
 	HAL_ADC_Stop(&hadc1);
 }
 void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim){
@@ -479,7 +479,7 @@ void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim){
 			TIM2->CCR1 = pwm;
 			
 			//sense vibration
-			if(measure_vibration > 100){ //threshold
+			if(measure_vibration > 1000){ //threshold
 				cnt = 0;
 				state = 1;
 			}else if(cnt > 60000){ //1 min no movement
