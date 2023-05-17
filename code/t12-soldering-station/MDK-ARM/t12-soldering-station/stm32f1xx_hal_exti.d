@@ -26,7 +26,6 @@ t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Drive
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
-t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
 t12-soldering-station\stm32f1xx_hal_exti.o: ../../../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h

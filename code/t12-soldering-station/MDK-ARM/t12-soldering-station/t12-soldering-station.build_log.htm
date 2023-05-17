@@ -27,11 +27,19 @@ Project File Date:  05/05/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 't12-soldering-station'
-compiling main.c...
 linking...
-Program Size: Code=13630 RO-data=294 RW-data=1604 ZI-data=1916  
-FromELF: creating hex file...
-"t12-soldering-station\t12-soldering-station.axf" - 0 Error(s), 0 Warning(s).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol MX_ADC1_Init (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol MX_GPIO_Init (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol MX_I2C1_Init (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol MX_TIM2_Init (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol MX_USART1_UART_Init (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol hadc1 (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol htim2 (referred from main.o).
+t12-soldering-station\t12-soldering-station.axf: Error: L6218E: Undefined symbol hi2c1 (referred from oled.o).
+Not enough information to list image symbols.
+Not enough information to list load addresses in the image map.
+Finished: 2 information, 0 warning and 8 error messages.
+"t12-soldering-station\t12-soldering-station.axf" - 8 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -54,6 +62,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.2.0
+Target not created.
 Build Time Elapsed:  00:00:01
 </pre>
 </body>
