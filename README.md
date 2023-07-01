@@ -8,6 +8,7 @@ with 3D-printed nylon shell
 ## Feature
 * regulate the temperature on the tip of soldering iron according to the set temperature (200 - 400 degree)
 * using a 0.92 inch OLED to display current temperature and set temperature
+* set the temperature using a rotary potentiometer
 * auto sleep and wake function according to sensed vibration
 
 ## Working principle
