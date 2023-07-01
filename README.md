@@ -1,6 +1,8 @@
 # t12-solder-station
 
+bare-bone version
 ![](/img/1.jpg)
+with 3D-printed nylon shell
 ![](/img/2.jpg)
 
 ## Feature
